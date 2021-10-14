@@ -71,8 +71,17 @@ class App extends Component{
   render(){
    
     let test = this.state.AnswerList.map((ans,index)=>{
+      if(index===0)
+        return (<div>
+          <AnswerItem answer = {ans.answer} onDelete = {this.deleteHandler.bind(this, index)}
+          color="lightgreen"
+          a = {ans.curA} 
+          b = {ans.curB} 
+          N = {ans.curN}/>
+          </div>);
       return(<div>
       <AnswerItem answer = {ans.answer} onDelete = {this.deleteHandler.bind(this, index)}
+      color="wheat"
       a = {ans.curA} 
       b = {ans.curB} 
       N = {ans.curN}/>
