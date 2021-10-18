@@ -24,7 +24,7 @@
   color: white;
 }
 
-.header{
+.header,h1{
   background-color: #FFB254;
   color: white;
   display: flex;
@@ -58,14 +58,29 @@ button{
 }
 .settings{
   background-color:#97def3;
-	width: 30%;
+	width: 60%;
   margin-top: 50px;
-  margin-left: 35%;
+  margin-left: 20%;
   padding-bottom: 50px;
   text-align: center;
   justify-content: center;
   border: 3px solid rgb(60, 175, 179);
   border-radius: 25px
+}
+.nav{
+  background-color:#97def3;
+  display: flex;
+  padding:0;
+  justify-content: center;
+  list-style-type: none;
+  border-bottom:  1px solid rgb(60, 175, 179);
+}
+.link{
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  padding: 12px 16px;
+  color: #29838C;
 }
 .App-link {
   color: #61dafb;
