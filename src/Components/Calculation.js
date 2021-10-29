@@ -1,6 +1,7 @@
 import AnswerItem from './AnswerItem.js';
 import img from '../img.PNG';
 import { Component } from 'react';
+import axios from 'axios';
 
 class Calculation extends Component{
   
@@ -53,18 +54,49 @@ class Calculation extends Component{
     let tmp = pos*pos*pos/(3.0+pos)
     return tmp;
   }
+  // calculateHandler(){
+  //   let currentList=this.state.AnswerList;
+  //   let result = 0;
+  //   let a = this.state.a;
+  //   let b = this.state.b;
+  //   let N = this.state.N;
+  //   let h = (b - a)/N;
+  //   for (let i = 1; i < N - 1; i++)
+  //     result += +h * (this.myFunc(+a + (+h * +i)));
+  //   result += (h * ((this.myFunc(+a) + this.myFunc(+b)) / +2));
+  //   currentList.unshift({answer:result, curA: a, curB: b, curN: N});
+  //   this.setState({AnswerList:currentList})
+  // }
   calculateHandler(){
     let currentList=this.state.AnswerList;
     let result = 0;
-    let a = this.state.a;
-    let b = this.state.b;
-    let N = this.state.N;
-    let h = (b - a)/N;
-    for (let i = 1; i < N - 1; i++)
-      result += +h * (this.myFunc(+a + (+h * +i)));
-    result += (h * ((this.myFunc(+a) + this.myFunc(+b)) / +2));
-    currentList.unshift({answer:result, curA: a, curB: b, curN: N});
-    this.setState({AnswerList:currentList})
+    // let h = (b - a)/N;
+    let integralVars = {
+      a: this.state.a,
+      b: this.state.b,
+      n: this.state.N,
+      integral: "x*x"
+    };
+    console.log(integralVars);
+    const jsonModel = JSON.stringify(integralVars);
+    console.log(jsonModel);
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    axios.post(process.env.REACT_APP_PATH, jsonModel,{
+      headers: headers
+    })
+      .then(res => {
+        console.log("then");
+        console.log(res);
+        console.log(res.data);
+        currentList.unshift({answer:res.data.answer, curA: integralVars.a, curB: integralVars.b, curN: integralVars.n});
+        this.setState({AnswerList:currentList})
+      })
+      console.log("afterthen");
+      console.log(this.currentList);
+    //  currentList.unshift({answer:result, curA: a, curB: b, curN: N});
+
   }
   render(){
    

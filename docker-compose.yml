@@ -7,9 +7,18 @@ services:
     restart: always
     ports:
       - 3000:3000
+    environment:
+      REACT_APP_PATH: 'https://integral:44385/api/Integral'
 
   portainer:
     image: portainer/portainer-ce
     restart: always
     ports:
       - 9000:9000
+
+  integral:
+    image: delxys/test
+    restart: always
+    ports:
+      - 5000:5000
+    
