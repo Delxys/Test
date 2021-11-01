@@ -11,11 +11,13 @@ class Calculation extends Component{
     console.log("constructor");
     this.state={
       AnswerList:[],
+      integral: 'x',
       a:0, 
       b:100, 
       N:100,
       parameterList:[]
     }
+    this.onIntegralChange = this.onIntegralChange.bind(this);
     this.onAChange = this.onAChange.bind(this);
     this.onBChange = this.onBChange.bind(this);
     this.onNChange = this.onNChange.bind(this);
@@ -34,7 +36,10 @@ class Calculation extends Component{
     const answerListNew=[]
     this.setState({AnswerList:answerListNew})
   }
-
+  onIntegralChange(e) {
+    var val = e.target.value;
+    this.setState({integral: val });
+  }
   onAChange(e) {
     var val = e.target.value;
     this.setState({a: val });
@@ -75,7 +80,7 @@ class Calculation extends Component{
       a: this.state.a,
       b: this.state.b,
       n: this.state.N,
-      integral: "x*x"
+      integral: this.state.integral
     };
     console.log(integralVars);
     const jsonModel = JSON.stringify(integralVars);
@@ -121,7 +126,8 @@ class Calculation extends Component{
       <div>
         <div className="settings">
           <h1 className="header">Расчет интеграла</h1>
-          <img src={img} alt="image" />
+          {/* <img src={img} alt="image" /> */}
+          <p>Выражение</p><input type = "text" onChange={this.onIntegralChange}></input>
           <p>a</p><input type = "text" onChange={this.onAChange}></input>
           <p>b</p><input type = "text" onChange={this.onBChange}></input>
           <p>N</p><input type = "text" onChange={this.onNChange}></input>
